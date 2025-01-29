@@ -1,0 +1,77 @@
+:root {
+  --background-color: linear-gradient(180deg, #FFD0F3, #F2F9B4);
+  --heading-color: #000000;
+  --stroke-color: #ffffff;
+  --menu-button-color: #000000;
+
+  --start-button-background-color: #C7E377;
+  --start-button-border-color: #B4CA75;
+  --start-button-background-color-hover: #cce686;
+  --start-button-background-color-active: #bddb68;
+
+  --records-button-background-color: #B4BCFF;
+  --records-button-border-color: #A0A8F3;
+  --records-button-background-color-hover: #c2c8ff;
+  --records-button-background-color-active: #a6aef3;
+
+  --settings-button-background-color: #E9264D;
+  --settings-button-border-color: #C61E40;
+  --settings-button-background-color-hover: #ed3a5e;
+  --settings-button-background-color-active: #d31b40;
+
+  --settings-form-background-color: #ffffff;
+  --settings-form-border-color: #F1C3E5;
+  --settings-form-color: #000000;
+
+  --fake-radio-border-color: #c7e377;
+  --fake-radio-before-background-color: #c7e377;
+  --fake-radio-border-color-red: #E9264D;
+  --fake-radio-before-background-color-red: #E9264D;
+  --fake-radio-border-color-violet: #B4BCFF;
+  --fake-radio-before-background-color-violet: #B4BCFF;
+
+  --button-color: #000000;
+
+  --apply-button-background-color: #B4BCFF;
+  --apply-button-background-color-hover: #c2c8ff;
+  --apply-button-background-color-active: #a6aef3;
+
+  --playing-field-background-color: #ffffff;
+  --playing-field-border-color: #F1C3E5;
+  --playing-field-stop-button-background-color: #B4BCFF;
+  --playing-field-stop-button-color: #000000;
+
+  --card-background-color: #b4bcff;
+  --card-border-color: #a0a8f3;
+  --card-background-color-hover: #c0c6ff;
+  --card-background-color-active: #a7affa;
+
+  --card-open-color: #e9264d;
+  --card-open-background-color: #f4f2ef;
+  --card-open-border-color: #e9e5de;
+  --card-open-background-color-hover: #fafaf9;
+  --card-open-background-color-active: #e4dfd7;
+
+  --card-success-color: #ffffff;
+  --card-success-background-color: #c7e377;
+  --card-success-border-color: #b4ca75;
+  --card-success-background-color-hover: #cce686;
+  --card-success-background-color-active: #bddb68;
+
+  --modal-content-background-color: #ffffff;
+  --modal-content-border-color: #F1C3E5;
+
+  --modal-text-color: #000000;
+  --modal-text-background-color: #ffffff;
+  --modal-text-border-color: #F1C3E5;
+
+  --modal-button-background-color: #C7E377;
+  --modal-button-border-color: #B4CA75;
+  --modal-button-color: #000000;
+  --modal-button-background-color-hover: #cce686;
+  --modal-button-background-color-active: #bddb68;
+
+  --stopwatch-color: #000000;
+  --timer-color: #000000;
+  --timer-attention-color: #E9264D;
+}

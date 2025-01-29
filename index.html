@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="./icon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rampart+One&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/light.css" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="./css/dark.css" media="(prefers-color-scheme: dark)">
+
+  <title>Игра в пары</title>
+  <script defer type="module" src="main.js"></script>
+</head>
+
+<body>
+  <div id="container" class="press-start-2p-regular">
+
+    <div id="main-menu">
+      <h1 class="heading">ИГРА В ПАРЫ</h1>
+
+      <div class="menu-button-group">
+        <button id="start-button" class="start-button menu-button">ИГРАТЬ</button>
+        <button class="records-button menu-button">РЕКОРДЫ</button>
+        <button id="settings-button" class="settings-button menu-button">НАСТРОЙКИ</button>
+      </div>
+    </div>
+
+    <form id="settings-form" class="settings-form">
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Выберите сложность:</legend>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button" type="radio" name="difficulty" value="test" checked>
+            <span class="fake-radio"></span>
+            Тест
+          </label>
+        </span>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button" type="radio" name="difficulty" value="easy">
+            <span class="fake-radio"></span>
+            Легко
+          </label>
+        </span>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button" type="radio" name="difficulty" value="medium">
+            <span class="fake-radio"></span>
+            Нормально
+          </label>
+        </span>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button" type="radio" name="difficulty" value="hard">
+            <span class="fake-radio"></span>
+            Сложно
+          </label>
+        </span>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Сыграем на время?</legend>
+        <label class="fieldset-label">
+          <input class="radio-button" type="radio" name="timer" value="no" checked>
+          <span class="fake-radio violet"></span>
+          Нет
+        </label>
+        <label class="fieldset-label">
+          <input class="radio-button" type="radio" name="timer" value="yes">
+          <span class="fake-radio violet"></span>
+          Да
+        </label>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Отключить звук?</legend>
+        <label class="fieldset-label">
+          <input class="radio-button" type="radio" name="sound" checked>
+          <span class="fake-radio red"></span>
+          Нет
+        </label>
+        <label class="fieldset-label">
+          <input class="radio-button" type="radio" name="sound">
+          <span class="fake-radio red"></span>
+          Да
+        </label>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Выберите тему:</legend>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button theme" type="radio" name="theme" value="system" checked>
+            <span class="fake-radio"></span>
+            Системная
+          </label>
+        </span>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button theme" type="radio" name="theme" value="light">
+            <span class="fake-radio"></span>
+            Светлая
+          </label>
+        </span>
+        <span class="fieldset-radio-list">
+          <label class="fieldset-label">
+            <input class="radio-button theme" type="radio" name="theme" value="dark">
+            <span class="fake-radio"></span>
+            Тёмная
+          </label>
+        </span>
+      </fieldset>
+
+      <div class="settings-button-group">
+        <button class="button apply-button" type="submit">Готово</button>
+      </div>
+    </form>
+
+    <div id="playing-group" class="playing-group">
+      <div id="stopwatch" class="stopwatch">00:00</div>
+      <div id="timer" class="timer">00:00</div>
+
+      <div id="playing-field" class="playing-field"></div>
+
+      <button id="stop-button" class="stop-button">Выход</button>
+    </div>
+
+    <form id="modal" class="modal">
+      <fieldset class="modal-content">
+        <legend id="modal-text" class="modal-text"></legend>
+        <button id="modal-button" class="modal-button"> Ещё раз!</button>
+      </fieldset>
+    </form>
+
+  </div>
+</body>
+
+</html>
