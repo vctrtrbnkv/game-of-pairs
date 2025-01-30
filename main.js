@@ -7,7 +7,11 @@ import {
 
 import { updateStopwatch } from "./scripts/stopwatch.js";
 
-import { getSelectedSettings } from "./scripts/settings.js";
+import {
+  getSelectedSettings,
+  setupSettingsRadioButtons,
+  setupScheme
+} from "./scripts/settings.js";
 
 (function () {
   let cardsArray = [];
@@ -294,80 +298,92 @@ import { getSelectedSettings } from "./scripts/settings.js";
     saveToLocalStorage('records', records);
   }
 
-  const lightStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=light]');
-  const darkStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]');
-  const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
-  const switcherRadios = document.querySelectorAll('.theme');
+  // const lightStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=light]');
+  // const darkStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]');
+  // const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
+  // const switcherRadios = document.querySelectorAll('.theme');
 
-  function setupSwitcher() {
-    const savedScheme = getSavedScheme();
+  // function setupSwitcher() {
+  //   const savedScheme = getSavedScheme();
 
-    if (savedScheme !== null) {
-      const currentRadio = document.querySelector(`.theme[value=${savedScheme}]`);
-      currentRadio.checked = true;
-    }
+  //   if (savedScheme !== null) {
+  //     const currentRadio = document.querySelector(`.theme[value=${savedScheme}]`);
+  //     currentRadio.checked = true;
+  //   }
 
-    [...switcherRadios].forEach((radio) => {
-      radio.addEventListener('change', (event) => {
-        setScheme(event.target.value);
-      });
-    });
-  }
+  //   [...switcherRadios].forEach((radio) => {
+  //     radio.addEventListener('change', (event) => {
+  //       setScheme(event.target.value);
+  //     });
+  //   });
+  // }
 
-  function setupScheme() {
-    const savedScheme = getSavedScheme();
-    const systemScheme = getSystemSheme();
+  // function setupScheme() {
+  //   const savedScheme = getSavedScheme();
+  //   const systemScheme = getSystemSheme();
 
-    if (savedScheme === null) return;
+  //   if (savedScheme === null) return;
 
-    if (savedScheme !== systemScheme) {
-      setScheme(savedScheme);
-    }
-  }
+  //   if (savedScheme !== systemScheme) {
+  //     setScheme(savedScheme);
+  //   }
+  // }
 
-  function setScheme(scheme) {
-    switchMedia(scheme);
+  // function setScheme(scheme) {
+  //   switchMedia(scheme);
 
-    if (scheme === 'system') {
-      clearScheme();
-    } else {
-      setData('color-scheme', scheme);
-    }
-  }
+  //   if (scheme === 'system') {
+  //     clearScheme();
+  //   } else {
+  //     setData('color-scheme', scheme);
+  //   }
+  // }
 
-  function switchMedia(scheme) {
-    let lightMedia;
-    let darkMedia;
+  // function switchMedia(scheme) {
+  //   let lightMedia;
+  //   let darkMedia;
 
-    if (scheme === 'system') {
-      lightMedia = '(prefers-color-scheme: light)';
-      darkMedia = '(prefers-color-scheme: dark)';
-    } else {
-      lightMedia = (scheme === 'light') ? 'all' : 'not all';
-      darkMedia = (scheme === 'dark') ? 'all' : 'not all';
-    }
+  //   if (scheme === 'system') {
+  //     lightMedia = '(prefers-color-scheme: light)';
+  //     darkMedia = '(prefers-color-scheme: dark)';
+  //   } else {
+  //     lightMedia = (scheme === 'light') ? 'all' : 'not all';
+  //     darkMedia = (scheme === 'dark') ? 'all' : 'not all';
+  //   }
 
-    [...lightStyles].forEach((link) => {
-      link.media = lightMedia;
-    });
+  //   [...lightStyles].forEach((link) => {
+  //     link.media = lightMedia;
+  //   });
 
-    [...darkStyles].forEach((link) => {
-      link.media = darkMedia;
-    });
-  }
+  //   [...darkStyles].forEach((link) => {
+  //     link.media = darkMedia;
+  //   });
+  // }
 
-  function getSystemSheme() {
-    const darkScheme = darkSchemeMedia.matches;
+  // function getSystemSheme() {
+  //   const darkScheme = darkSchemeMedia.matches;
 
-    return darkScheme ? 'dark' : 'light';
-  }
+  //   return darkScheme ? 'dark' : 'light';
+  // }
 
-  function getSavedScheme() {
-    return localStorage.getItem('color-scheme');
-  }
+  // function getSavedScheme() {
+  //   return localStorage.getItem('color-scheme');
+  // }
 
-  function clearScheme() {
-    localStorage.removeItem('color-scheme');
+  // function clearScheme() {
+  //   localStorage.removeItem('color-scheme');
+  // }
+
+  function renderSettings() {
+    const mainMenu = document.getElementById('main-menu');
+    const form = document.getElementById('settings-form');
+
+    // setupSwitcher();
+
+    setupSettingsRadioButtons();
+
+    mainMenu.style.display = 'none';
+    form.style.display = 'block';
   }
 
   function initGame() {
@@ -376,7 +392,7 @@ import { getSelectedSettings } from "./scripts/settings.js";
     const settingsButton = document.getElementById('settings-button');
     const form = document.getElementById('settings-form');
 
-    setupSwitcher();
+
     setupScheme();
 
     updateDisplay(totalTime);
@@ -387,10 +403,7 @@ import { getSelectedSettings } from "./scripts/settings.js";
       startGame();
     })
 
-    settingsButton.addEventListener('click', () => {
-      mainMenu.style.display = 'none';
-      form.style.display = 'block';
-    })
+    settingsButton.addEventListener('click', renderSettings)
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();

@@ -1,3 +1,5 @@
+import { getJsonFromLocalStorage, saveToLocalStorage } from "./storage.js";
+
 export function getSelectedSettings(gameConfig) {
   const form = document.getElementById('settings-form');
 
@@ -11,41 +13,22 @@ export function getSelectedSettings(gameConfig) {
 const lightStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=light]');
 const darkStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]');
 const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
-const switcherRadios = document.querySelectorAll('.theme');
 
-function setupSwitcher() {
-  const savedScheme = getSavedScheme();
+function getSystemSheme() {
+  const darkScheme = darkSchemeMedia.matches;
 
-  if (savedScheme !== null) {
-    const currentRadio = document.querySelector(`.theme[value=${savedScheme}]`);
-    currentRadio.checked = true;
-  }
-
-  [...switcherRadios].forEach((radio) => {
-    radio.addEventListener('change', (event) => {
-      setScheme(event.target.value);
-    });
-  });
+  return darkScheme ? 'dark' : 'light';
 }
 
-function setupScheme() {
-  const savedScheme = getSavedScheme();
+export function setupScheme() {
+  const savedSettings = getJsonFromLocalStorage('settings');
+  const savedScheme = savedSettings.scheme;
   const systemScheme = getSystemSheme();
 
-  if (savedScheme === null) return;
+  if (!savedScheme) return;
 
   if (savedScheme !== systemScheme) {
-    setScheme(savedScheme);
-  }
-}
-
-function setScheme(scheme) {
-  switchMedia(scheme);
-
-  if (scheme === 'system') {
-    clearScheme();
-  } else {
-    setData('color-scheme', scheme);
+    switchMedia(savedScheme);
   }
 }
 
@@ -67,5 +50,38 @@ function switchMedia(scheme) {
 
   [...darkStyles].forEach((link) => {
     link.media = darkMedia;
+  });
+}
+
+const settingsRadioButtonsListeners = {
+  difficulty: (value) => { },
+  scheme: switchMedia,
+};
+
+export function setupSettingsRadioButtons() {
+  const savedSettings = getJsonFromLocalStorage('settings');
+  const settingsRadioButtons = document.querySelectorAll('[type=radio]');
+
+  settingsRadioButtons.forEach((radioButton) => {
+
+    if (savedSettings[radioButton.name] === radioButton.value) {
+      radioButton.checked = true;
+    }
+
+    radioButton.addEventListener('change', (event) => {
+      const updatedSettings = getJsonFromLocalStorage('settings');
+      const name = event.target.name;
+      const value = event.target.value;
+
+      saveToLocalStorage('settings', {
+        ...updatedSettings,
+        [name]: value,
+      });
+
+      const listener = settingsRadioButtonsListeners[name];
+      if (!listener) return;
+      listener(value);
+
+    });
   });
 }

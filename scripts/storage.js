@@ -10,16 +10,16 @@ function getData(key) {
   return localStorage.getItem(key);
 }
 
-function setData(key, data) {
+export function setData(key, data) {
   localStorage.setItem(key, data);
 }
 
-function saveToLocalStorage(key, data) {
+export function saveToLocalStorage(key, data) {
   const jsonData = dataToJson(data); // Преобразуем данные в JSON
   setData(key, jsonData); // Сохраняем данные в LocalStorage под указанным ключом
 }
 
-function getDataFromLocalStorage(key) {
+export function getJsonFromLocalStorage(key) {
   let jsonData = getData(key); // Получаем данные из localStorage по указанному ключу
 
   jsonData = jsonData ? jsonToData(jsonData) : {}; //если есть данные, то их преобразуем в объект
@@ -28,10 +28,19 @@ function getDataFromLocalStorage(key) {
 }
 
 function saveRecordToLocalStorage(difficulty, time) {
-  const records = getDataFromLocalStorage('records');
+  const records = getJsonFromLocalStorage('records');
   records[difficulty] = time;
   saveToLocalStorage('records', records);
 }
+
+export const saveSettingToLocalStorage = (settingName, settingValue) => {
+  const settings = getJsonFromLocalStorage('settings');
+
+  saveToLocalStorage('settings', {
+    ...settings,
+    [settingName]: settingValue,
+  });
+};
 
 function remember(form) {
   let radioChecked = [];
@@ -60,16 +69,11 @@ function recollect(form) {
     }
   }
 }
-function getSystemSheme() {
-  const darkScheme = darkSchemeMedia.matches;
 
-  return darkScheme ? 'dark' : 'light';
-}
-
-function getSavedScheme() {
+export function getSavedScheme() {
   return localStorage.getItem('color-scheme');
 }
 
-function clearScheme() {
+export function clearScheme() {
   localStorage.removeItem('color-scheme');
 }
